@@ -119,8 +119,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
     },
     button: {
-        width: 300,
-        height: 40,
+        width: '35%',
+        height: '30%',
         backgroundColor: '#4169E1',
         justifyContent: 'center',
         alignItems: 'center',
