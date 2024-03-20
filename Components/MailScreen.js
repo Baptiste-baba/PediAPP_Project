@@ -1,11 +1,11 @@
-// HomeScreen.js
+// MailScreen.js
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const HomeScreen = ({ navigation }) => {
+const MailScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>Welcome to the Home Screen!</Text>
+      <Text>Welcome to the Mail Screen!</Text>
 
     </View>
   );
@@ -19,4 +19,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default MailScreen;
