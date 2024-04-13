@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
 import { useAuth } from '../contexts/AuthContext'; // Assurez-vous que le chemin est correct
+import { useNavigation } from '@react-navigation/native'; // Importez useNavigation
 
 const LoginScreen = () => {
+  const navigation = useNavigation(); // Utilisez le hook useNavigation
   const { signIn } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const navigateToRegister = () => {
+    navigation.navigate('Register'); // Assurez-vous que 'Register' est le nom que vous avez utilisé dans votre Stack.Navigator pour RegisterScreen
+  };
 
   const handleLogin = async () => {
     try {
@@ -57,7 +63,9 @@ const LoginScreen = () => {
         <Text style={styles.buttonText}>Log in</Text>
       </TouchableOpacity>
       <Text style={styles.forgotPassword}>Forgot your password ?</Text>
-      <Text style={styles.register}>Don’t have an account yet ?</Text>
+      <TouchableOpacity onPress={navigateToRegister}>
+        <Text style={styles.register}>Don't have an account yet ?</Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -114,7 +122,7 @@ const styles = StyleSheet.create({
     color: 'blue', // Adjust the color to match the screenshot
   },
   register: {
-    color: 'grey' // Adjust the color to match the screenshot
+    color: 'blue' // Adjust the color to match the screenshot
   }
 });
 

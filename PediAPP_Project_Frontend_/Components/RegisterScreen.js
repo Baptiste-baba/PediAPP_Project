@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
+import { useNavigation } from '@react-navigation/native'; // Importez useNavigation
 
 const RegisterScreen = () => {
+    const navigation = useNavigation();
     const [email, setEmail] = useState('');
     const [name, setName] = useState('');
     const [password, setPassword] = useState('');
@@ -10,6 +12,10 @@ const RegisterScreen = () => {
     const [childName, setChildName] = useState('');
     const [dateOfBirth, setDateOfBirth] = useState('');
     const [gender, setGender] = useState('');
+
+    const navigateToLogin = () => {
+        navigation.navigate('Login'); // Assurez-vous que 'Register' est le nom que vous avez utilisé dans votre Stack.Navigator pour RegisterScreen
+      };
 
     const handleRegister = async () => {
         if (password !== confirmPassword) {
@@ -37,6 +43,7 @@ const RegisterScreen = () => {
             const data = await response.json();
     
             if (response.status === 200) {
+                navigateToLogin()
                 // Gérer la réussite, peut-être naviguer vers la page de connexion ou l'écran d'accueil
             } else {
                 // Gérer les erreurs venant de l'API
@@ -104,7 +111,7 @@ const RegisterScreen = () => {
                 <TouchableOpacity style={styles.button} onPress={handleRegister}>
                     <Text style={styles.buttonText}>Sign up</Text>
                 </TouchableOpacity>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={navigateToLogin}>
                     <Text style={styles.linkText}>I already have an account</Text>
                 </TouchableOpacity>
             </View>
@@ -163,9 +170,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
     },
     picker: {
-        height: '10%',
-        width: '80%',
-        marginBottom: '35%',
+        height: 30,
+        width: 150,
     },
     label: {
         marginTop: '9%',
