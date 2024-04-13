@@ -1,10 +1,39 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, TouchableOpacity } from 'react-native';
+import { useAuth } from '../contexts/AuthContext'; // Assurez-vous que le chemin est correct
 
 const LoginScreen = () => {
+  const { signIn } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [isSelected, setSelection] = useState(false);
+
+  const handleLogin = async () => {
+    try {
+        const response = await fetch('http://192.168.0.107:3000/api/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                email, // Assurez-vous que ce champ correspond à ce que le backend attend
+                password,
+            }),
+        });
+
+        const data = await response.json();
+
+        if (response.status === 200) {
+            console.log('Connexion réussie:', data);
+            signIn({ email });
+            // Vous pourriez maintenant naviguer vers l'écran principal de l'application
+            // ou stocker le jeton d'authentification dans un état global / local storage.
+        } else {
+            console.error('Erreur lors de la connexion:', data.message);
+        }
+    } catch (error) {
+        console.error('Erreur de réseau :', error);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -24,7 +53,7 @@ const LoginScreen = () => {
         secureTextEntry={true}
         placeholder="Password"
       />
-      <TouchableOpacity onPress={() => {}} style={styles.button}>
+      <TouchableOpacity onPress={handleLogin} style={styles.button}>
         <Text style={styles.buttonText}>Log in</Text>
       </TouchableOpacity>
       <Text style={styles.forgotPassword}>Forgot your password ?</Text>

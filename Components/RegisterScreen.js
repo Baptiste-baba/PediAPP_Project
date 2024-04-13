@@ -11,6 +11,68 @@ const RegisterScreen = () => {
     const [dateOfBirth, setDateOfBirth] = useState('');
     const [gender, setGender] = useState('');
 
+    const handleRegister = async () => {
+        if (password !== confirmPassword) {
+            // Affichez une erreur si les mots de passe ne correspondent pas
+            console.error('Les mots de passe ne correspondent pas.');
+            return;
+        }
+    
+        try {
+            const response = await fetch('http://192.168.0.107:3000/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    email,
+                    name,
+                    password, // Ceci est sécurisé si votre API est en HTTPS
+                    childName,
+                    dateOfBirth,
+                    gender,
+                }),
+            });
+    
+            const data = await response.json();
+    
+            if (response.status === 200) {
+                // Gérer la réussite, peut-être naviguer vers la page de connexion ou l'écran d'accueil
+            } else {
+                // Gérer les erreurs venant de l'API
+                console.error(data.message || 'Une erreur est survenue lors de l\'inscription.');
+            }
+        } catch (error) {
+            // Gérer les erreurs de requête
+            console.error('Erreur de réseau : ', error);
+        }
+
+        try {
+            const response = await fetch('http://192.168.0.107:3000/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    // ... données de l'utilisateur ...
+                }),
+            });
+    
+            const textResponse = await response.text(); // Lisez d'abord la réponse en tant que texte
+    
+            try {
+                const data = JSON.parse(textResponse); // Essayez ensuite de l'analyser comme JSON
+                // ... la suite du traitement ...
+            } catch (jsonParseError) {
+                console.error('La réponse n\'est pas au format JSON :', textResponse);
+                // Vous pouvez aussi renvoyer ici ou lancer une autre erreur si nécessaire
+            }
+        } catch (networkError) {
+            // Gérer les erreurs de requête
+            console.error('Erreur de réseau : ', networkError);
+        }
+    };
+
     return (
         <View style={styles.container}>
             <View style={styles.container_0}>
@@ -39,7 +101,7 @@ const RegisterScreen = () => {
                 </Picker>
             </View>
             <View style={styles.container_4}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity style={styles.button} onPress={handleRegister}>
                     <Text style={styles.buttonText}>Sign up</Text>
                 </TouchableOpacity>
                 <TouchableOpacity>
