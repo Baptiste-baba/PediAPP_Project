@@ -1,11 +1,12 @@
-import React from 'react'
-import LoginScreen from './Components/LoginScreen'
-import RegisterScreen from './Components/RegisterScreen'
+// App.js
+import React from 'react';
+import { AuthProvider } from './contexts/AuthContext'; // Assurez-vous que le chemin est correct
+import Navigation from './Navigation/Navigation';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <RegisterScreen/>
-    )
-  }
+export default function App() {
+  return (
+    <AuthProvider>
+      <Navigation />
+    </AuthProvider>
+  );
 }
