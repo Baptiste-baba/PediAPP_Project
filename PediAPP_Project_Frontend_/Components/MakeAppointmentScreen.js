@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { View, FlatList, Text, StyleSheet, TouchableOpacity, Image, TextInput, onPress } from 'react-native';
+import { useNavigation } from '@react-navigation/native'; // Importez useNavigation
+
 
 const MakeAppointmentScreen = () => {
+    const navigation = useNavigation();
     const [Doctors, setDoctors] = useState([]);
 
     useEffect(() => {
@@ -11,13 +14,17 @@ const MakeAppointmentScreen = () => {
             .catch(error => console.error(error));
     }, []);
 
+    const navigateToMyAppointments = () => {
+        navigation.navigate('CalendarScreen'); // Assurez-vous que 'Register' est le nom que vous avez utilisé dans votre Stack.Navigator pour RegisterScreen
+      };
+
     return (
         <View style={styles.container}>
           <View style={styles.container_0}>
             <Text style={styles.header}>Make an appointment</Text>
           </View>
           <View style={styles.container_1}>
-            <TouchableOpacity style={styles.button} onPress={onPress}>
+            <TouchableOpacity style={styles.button} onPress={navigateToMyAppointments}>
                 <Image
                     source={require('../assets/icons/arrow-left.png')} // Assurez-vous d'avoir une icône de retour/flèche
                     style={styles.icon}

@@ -1,19 +1,20 @@
 // HomeScreen.js
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-
+import { useNavigation } from '@react-navigation/native';
 
 const HomeScreen = () => {
     const [searchQuery, setSearchQuery] = useState('');
+    const navigation = useNavigation();
 
     const handleSearch = () => {
         // Ajoutez la logique de recherche ici
         console.log(searchQuery);
     };
 
-    const handleDiseasePress = (disease) => {
+    const handleDiseasePress = (diseaseId) => {
         // Gérez le clic sur un bouton maladie
-        console.log(disease);
+        navigation.navigate('DiseaseInfoScreen', { diseaseId: diseaseId });
     };
 
     return (
@@ -33,18 +34,18 @@ const HomeScreen = () => {
             </View>
             <View style={styles.container_1}>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button} onPress={() => handleDiseasePress('Asthma')}>
+                    <TouchableOpacity style={styles.button} onPress={() => handleDiseasePress('1')}>
                         <Text style={styles.buttonText}>ASTHMA</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => handleDiseasePress('Allergy')}>
+                    <TouchableOpacity style={styles.button} onPress={() => handleDiseasePress('2')}>
                         <Text style={styles.buttonText}>ALLERGY</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button} onPress={() => handleDiseasePress('Epilepsy')}>
+                    <TouchableOpacity style={styles.button} onPress={() => handleDiseasePress('3')}>
                         <Text style={styles.buttonText}>EPILEPSY</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => handleDiseasePress('Diabetes')}>
+                    <TouchableOpacity style={styles.button} onPress={() => handleDiseasePress('4')}>
                         <Text style={styles.buttonText}>DIABETES</Text>
                     </TouchableOpacity>
                 </View>

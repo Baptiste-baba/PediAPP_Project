@@ -11,6 +11,7 @@ import ProfileScreen from '../Components/ProfileScreen';
 import MakeAppointmentScreen from '../Components/MakeAppointmentScreen';
 import LoginScreen from '../Components/LoginScreen';
 import RegisterScreen from '../Components/RegisterScreen';
+import DiseaseInfoScreen from '../Components/DiseaseInfoScreen';
 
 // Importez vos images ici
 const homeIcon = require('../assets/icons/home.png');
@@ -26,6 +27,15 @@ function CalendarStack() {
     <Stack.Navigator>
       <Stack.Screen name="CalendarScreen" component={CalendarScreen} options={{ headerShown: false }} />
       <Stack.Screen name="MakeAppointmentScreen" component={MakeAppointmentScreen} options={{ headerShown: false }} />
+    </Stack.Navigator>
+  );
+}
+
+function HomeStack() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="HomeScreen" component={HomeScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="DiseaseInfoScreen" component={DiseaseInfoScreen} options={{ headerShown: false }} />
     </Stack.Navigator>
   );
 }
@@ -51,7 +61,7 @@ function AppTabs() {
         tabBarInactiveTintColor: 'black',
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} options={{ headerShown: false }} />
+      <Tab.Screen name="Home" component={HomeStack} options={{ headerShown: false }} />
       <Tab.Screen name="Calendar" component={CalendarStack} options={{ headerShown: false }} />
       <Tab.Screen name="Mail" component={MailScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
