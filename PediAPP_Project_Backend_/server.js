@@ -99,3 +99,21 @@ app.get('/api/Doctors', async (req, res) => {
 });
 
 app.listen(3000, () => console.log('Server running on port 3000'));
+
+app.get('/api/diseases/:diseaseId', async (req, res) => {
+    const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+    try {
+        await client.connect();
+        const collection = client.db("PediAPP-DB").collection("DiseasesInfos");
+        const disease = await collection.findOne({ name: req.params.diseaseName });
+        if (!disease) {
+            return res.status(404).json({ message: 'Maladie non trouvée' });
+        }
+        res.json(disease);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Erreur de serveur' });
+    } finally {
+        await client.close();
+    }
+});
