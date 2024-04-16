@@ -5,6 +5,7 @@ const MongoClient = require('mongodb').MongoClient;
 const uri = 'mongodb+srv://bdouchet92:QXHlD1P5iJTBYfa0@pediapp-db.exwk34t.mongodb.net/?retryWrites=true&w=majority&appName=PediAPP-DB';
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const { ObjectId } = require('mongodb');
 
 app.use(express.json());
 app.use(express.urlencoded());
@@ -117,3 +118,51 @@ app.get('/api/diseases/:diseaseId', async (req, res) => {
         await client.close();
     }
 });
+
+app.get('/api/profile/:userId', async (req, res) => {
+    try {
+      const { userId } = req.params;
+      await client.connect();
+      const db = client.db('PediAPP-DB');
+      const collection = db.collection('users'); // Assurez-vous que le nom de la collection est correct
+  
+      const user = await collection.findOne({ _id: ObjectId(userId) });
+      if (!user) {
+        return res.status(404).send('User not found');
+      }
+  
+      res.json(user);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    } finally {
+      await client.close();
+    }
+});
+
+app.patch('/api/profile/:userId', async (req, res) => {
+    const { userId } = req.params;
+    const updates = req.body;
+  
+    try {
+      await client.connect();
+      const db = client.db('PediAPP-DB');
+  
+      const result = await db.collection('users').updateOne(
+        { _id: new ObjectId(userId) },
+        { $set: updates }
+      );
+  
+      if (result.matchedCount === 0) {
+        res.status(404).send('User not found');
+      } else {
+        res.send('User updated successfully');
+      }
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    } finally {
+      await client.close();
+    }
+});
+  
