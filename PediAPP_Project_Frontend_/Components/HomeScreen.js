@@ -12,9 +12,9 @@ const HomeScreen = () => {
         console.log(searchQuery);
     };
 
-    const handleDiseasePress = (diseaseId) => {
+    const handleDiseasePress = (diseaseName) => {
         // Gérez le clic sur un bouton maladie
-        navigation.navigate('DiseaseInfoScreen', { diseaseId: diseaseId });
+        navigation.navigate('DiseaseInfoScreen', { diseaseName });
     };
 
     return (
@@ -34,15 +34,15 @@ const HomeScreen = () => {
             </View>
             <View style={styles.container_1}>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button} onPress={() => handleDiseasePress('1')}>
+                    <TouchableOpacity style={styles.button} onPress={() => handleDiseasePress('Asthme')}>
                         <Text style={styles.buttonText}>ASTHMA</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.button} onPress={() => handleDiseasePress('2')}>
+                    <TouchableOpacity style={styles.button} onPress={() => handleDiseasePress('Allergy')}>
                         <Text style={styles.buttonText}>ALLERGY</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <TouchableOpacity style={styles.button} onPress={() => handleDiseasePress('3')}>
+                    <TouchableOpacity style={styles.button} onPress={() => handleDiseasePress('Epilepsy')}>
                         <Text style={styles.buttonText}>EPILEPSY</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button} onPress={() => handleDiseasePress('4')}>

@@ -5,15 +5,15 @@ import { useRoute } from '@react-navigation/native';
 const DiseaseInfoScreen = () => {
   const route = useRoute();
   const [diseaseInfo, setDiseaseInfo] = useState(null);
-  const { diseaseId } = route.params; // Assurez-vous d'envoyer diseaseId en paramètre lors de la navigation vers cet écran
+  const { diseaseName } = route.params; // Assurez-vous d'envoyer diseaseId en paramètre lors de la navigation vers cet écran
 
   useEffect(() => {
     // Remplacer 'your_api_endpoint' par l'URL de votre API et 'diseaseId' par l'identifiant approprié
-    fetch(`http://192.168.0.107:3000/api/diseases/${diseaseId}`)
+    fetch(`http://192.168.0.107:3000/api/diseases/${diseaseName}`)
       .then(response => response.json())
       .then(data => setDiseaseInfo(data))
       .catch(error => console.error(error));
-  }, [diseaseId]);
+  }, [diseaseName]);
 
   // Si les informations sur la maladie n'ont pas encore été chargées, afficher un message de chargement
   if (!diseaseInfo) {
