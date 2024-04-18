@@ -9,7 +9,7 @@ const DiseaseInfoScreen = () => {
 
   useEffect(() => {
     // Remplacer 'your_api_endpoint' par l'URL de votre API et 'diseaseId' par l'identifiant approprié
-    fetch(`http://192.168.0.107:3000/api/diseases/${diseaseName}`)
+    fetch(`http://172.20.10.11:3000/api/diseases/${diseaseName}`)
       .then(response => response.json())
       .then(data => setDiseaseInfo(data))
       .catch(error => console.error(error));

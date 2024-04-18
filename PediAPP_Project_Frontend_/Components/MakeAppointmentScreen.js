@@ -8,7 +8,7 @@ const MakeAppointmentScreen = () => {
     const [Doctors, setDoctors] = useState([]);
 
     useEffect(() => {
-        fetch('http://192.168.0.107:3000/api/Doctors')
+        fetch('http:/172.20.10.11:3000/api/Doctors')
             .then(response => response.json())
             .then(data => setDoctors(data))
             .catch(error => console.error(error));

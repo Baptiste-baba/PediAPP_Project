@@ -64,7 +64,7 @@ function AppTabs() {
       <Tab.Screen name="Home" component={HomeStack} options={{ headerShown: false }} />
       <Tab.Screen name="Calendar" component={CalendarStack} options={{ headerShown: false }} />
       <Tab.Screen name="Mail" component={MailScreen} />
-      <Tab.Screen name="Profile" component={ProfileScreen} />
+      <Tab.Screen name="Profile" component={ProfileScreen} options={{ headerShown: false }} />
     </Tab.Navigator>
   );
 }

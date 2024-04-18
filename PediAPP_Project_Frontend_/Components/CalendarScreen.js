@@ -8,7 +8,7 @@ const CalendarScreen = () => {
     const navigation = useNavigation();
 
     useEffect(() => {
-        fetch('http://192.168.0.107:3000/api/appointments')
+        fetch('http://172.20.10.11:3000/api/appointments')
             .then(response => response.json())
             .then(data => setAppointments(data))
             .catch(error => console.error(error));
