@@ -120,13 +120,14 @@ app.get('/api/diseases/:diseaseId', async (req, res) => {
 });
 
 app.get('/api/profile/:userId', async (req, res) => {
+    const client = new MongoClient(uri);
     try {
       const { userId } = req.params;
       await client.connect();
       const db = client.db('PediAPP-DB');
-      const collection = db.collection('users'); // Assurez-vous que le nom de la collection est correct
+      const collection = db.collection('Users');
   
-      const user = await collection.findOne({ _id: ObjectId(userId) });
+      const user = await collection.findOne({ _id: new ObjectId(userId) });
       if (!user) {
         return res.status(404).send('User not found');
       }
